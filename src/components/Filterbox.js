@@ -11,10 +11,6 @@ function Filterbox() {
           return (
             <li key={index} className="filter-option">
               <label>
-                {/* <input
-                  onChange={() => handleToggle(filterbox.options.filter)}
-                  type="checkbox"
-                /> */}
                 <span>{option}</span>
               </label>
             </li>

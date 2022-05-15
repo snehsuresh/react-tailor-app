@@ -16,6 +16,7 @@ import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import DesignPage from "./pages/DesignPage";
 import Error from "./pages/Error";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -24,9 +25,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/checkout" element={<Checkout />} />
+
           <Route path="/design" element={<DesignPage />} />
           <Route path="/error" element={<Error />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Router>
     </>

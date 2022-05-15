@@ -3,19 +3,23 @@ import Fabric from "../components/Fabric";
 import SuitStyle from "../components/SuitStyle";
 import SuitAddons from "../components/SuitAddons";
 import Submenu from "../components/Submenu";
+import { useGobalContext } from "../context";
+import { Link } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const DesignPage = () => {
-  const [page, setPage] = useState(0);
-  const designTitles = ["Choose Fabric", "Change Style", "Pick Addons"];
+  const { designPage, setDesignPage } = useGobalContext();
 
+  const designTitles = ["Choose Fabric", "Change Style", "Pick Addons"];
+  const [cartActive, setCartActive] = useState(false);
   const PageDisplay = () => {
-    if (page === 0) {
+    if (designPage === 0) {
       return <Fabric />;
     }
-    if (page === 1) {
+    if (designPage === 1) {
       return <SuitStyle />;
     }
-    if (page === 2) {
+    if (designPage === 2) {
       return <SuitAddons />;
     }
   };
@@ -26,39 +30,58 @@ const DesignPage = () => {
         <div className="progress-bar">
           {designTitles.map((item, index) => {
             return (
-              <>
-                <div
-                  key={index}
-                  className={`${
-                    page === index || page >= index ? "step" : "next"
-                  }`}
-                >
-                  {item}
-                </div>
-              </>
+              <div
+                key={index}
+                className={`step ${
+                  designPage === index || designPage >= index
+                    ? "step-active"
+                    : "next"
+                }`}
+              >
+                {item}
+              </div>
             );
           })}
-          <span>&gt;</span>
         </div>
         <div className="container-1">
           {PageDisplay()}
           <div className="design-footer">
             <button
-              disabled={page === 0}
+              className="circle"
+              disabled={designPage === 0}
               onClick={() => {
-                setPage((currPage) => currPage - 1);
+                setDesignPage((currPage) => currPage - 1);
               }}
             >
+              {/* <FaArrowLeft /> */}
               Prev
             </button>
-            <button
-              disabled={page === designTitles.length - 1}
-              onClick={() => {
-                setPage((currPage) => currPage + 1);
-              }}
-            >
-              Next
-            </button>
+
+            {/* <Link to="/cart" className="class">
+                Cart 
+            </Link> */}
+
+            {/* <FaArrowRight /> */}
+            {designPage === 2 ? (
+              <Link
+                to="/cart"
+                style={{
+                  color: "#fff",
+                }}
+              >
+                <button className="circle">Cart</button>
+              </Link>
+            ) : (
+              <button
+                className="circle"
+                disabled={designPage === designTitles.length + 1}
+                onClick={() => {
+                  setDesignPage((currPage) => currPage + 1);
+                }}
+              >
+                Next
+              </button>
+            )}
           </div>
         </div>
       </div>

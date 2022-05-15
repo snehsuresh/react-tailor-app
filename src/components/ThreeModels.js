@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function ThreeModels() {
   // const { handleSubmenu } = useGobalContext();
-  const { handleSubmenu } = useGobalContext();
+  const { handleSubmenu, designPage, setDesignPage } = useGobalContext();
 
   return (
     <>
@@ -13,7 +13,13 @@ export default function ThreeModels() {
         <div className="models-center">
           {models.map((model, index) => {
             return (
-              <article key={index} className="model">
+              <article
+                key={index}
+                className="model"
+                onClick={() => {
+                  setDesignPage(0);
+                }}
+              >
                 <Link to="/design">
                   <img
                     className="model-image"

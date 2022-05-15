@@ -6,21 +6,19 @@ import { fabrics } from "../data";
 import "react-dropdown/style.css";
 import { useGobalContext } from "../context";
 import MultistepShirt from "./MultistepShirt";
+import MultistepTrouser from "./MultistepTrouser";
+import MultistepJacket from "./MultistepJacket";
 
 function SuitStyle() {
-  const { custmoisedLook, setCustomisedLook, shirtColor, setShirtColor } =
+  const { custmoisedLook, setCustomisedLook, dropdownValue, setdropdownValue } =
     useGobalContext();
 
-  const customisedSuits = (object) => {
-    setCustomisedLook(object);
-  };
+  // const getInitialState = () => {
+  //   const value = "Shirt";
+  //   return value;
+  // };
 
-  const getInitialState = () => {
-    const value = "Shirt";
-    return value;
-  };
-
-  const [dropdownValue, setdropdownValue] = useState(getInitialState);
+  // const [dropdownValue, setdropdownValue] = useState(getInitialState);
 
   const handleDropdown = (e) => {
     setdropdownValue(e.target.value);
@@ -30,12 +28,23 @@ function SuitStyle() {
   //     shirtColor;
   // }, [shirtColor]);
 
+  const componentSelect = () => {
+    if (dropdownValue === "Shirt") {
+      return <MultistepShirt setColor={MultistepShirt} />;
+    }
+    if (dropdownValue === "Trouser") {
+      return <MultistepTrouser />;
+    }
+    if (dropdownValue === "Jacket") {
+      return <MultistepJacket setColor={MultistepShirt} />;
+    }
+  };
   return (
     <>
       <div className="design-content">
         <div className="fabric-menu">
           <div className="choice-switch">
-            <span class="class-title">{dropdownValue}</span>
+            <span className="class-title">{dropdownValue}</span>
             <Dropdown
               values={["Shirt", "Trouser", "Jacket"]}
               state={dropdownValue}
@@ -43,10 +52,9 @@ function SuitStyle() {
             />
           </div>
           <hr />
-          <MultistepShirt setColor={MultistepShirt} />
-          {console.log(shirtColor)}
+          {componentSelect()}
         </div>
-        <SuitCustomizedLook look={custmoisedLook} Img={true} />
+        <SuitCustomizedLook look={custmoisedLook} Img={dropdownValue} />
         <CustomizationDetail look={custmoisedLook} />
       </div>
     </>

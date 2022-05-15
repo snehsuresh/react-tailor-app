@@ -1,5 +1,16 @@
 import React, { useState, useContext } from "react";
-import { sublinks, subFilters, fabrics, customisedSuits } from "./data";
+import useLocalStorage from "./useLocalStorage";
+import useSessionStorage from "./useSessionStorage";
+import {
+  sublinks,
+  subFilters,
+  fabrics,
+  shirtFabric,
+  customisedSuits,
+} from "./data";
+import defaultTrouser from "./images/suit-trouser/default-trouser.jpg";
+import defaultJacket from "./images/jacket/single-breast-jacket.png";
+import Shirt from "./images/shirt-fabric/shirts/white.png";
 
 const AppContext = React.createContext();
 
@@ -16,24 +27,94 @@ export const AppProvider = ({ children }) => {
   const [checked, setChecked] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState([]);
   const [fabricCollection, setFabricCollection] = useState(fabrics);
+  const [selectedSuitFabricIds, setSelectedSuitFabricIds] = useState([0]);
+  const [selectedShirtFabricIDs, setSelectedShirtFabricIDs] = useState([0]);
 
-  const [custmoisedLook, setCustomisedLook] = useState(fabricCollection[0]);
-  const [needMeasure, setNeedMeasure] = useState(false);
+  const [designPage, setDesignPage] = useSessionStorage("status", 0);
+  const [dropdownValue, setdropdownValue] = useSessionStorage(
+    "dropdown",
+    "Shirt"
+  );
+  const [selectedShirtCollarIDs, setSelectedShirtCollarIDs] = useState([0]);
+  const [selectedShirtCuffIDs, setSelectedShirtCuffIDs] = useState([0]);
+  const [selectedShirtButtonIDs, setSelectedShirtButtonIDs] = useState([0]);
+  const [trouserImg, setTrouserImg] = useState(defaultTrouser);
+  const [jacketImg, setJacketImg] = useState(defaultJacket);
+  const [blazerInitials, setBlazerInitials] = useState("");
 
-  const [billItems, setBillItems] = useState([
+  const [trouserIds, setTrouserIds] = useState({
+    folds: "",
+    rise: "",
+    cuff: "",
+    sideAdjuster: "",
+  });
+
+  const [jacketIds, setJacketIds] = useState({
+    style: "",
+    lapel: "",
+    vest: "",
+    wasitcoat: "",
+    back: "",
+  });
+  const [jacket, setJacket] = useSessionStorage("jacket", {
+    style: "",
+    lapel: "",
+    vest: "",
+    wasitcoat: "",
+    back: "",
+  });
+
+  const [isThreePiece, setIsThreePiece] = useState(false);
+  const [isTuxedo, setIsTuxedo] = useState(false);
+
+  const [custmoisedLook, setCustomisedLook] = useSessionStorage(
+    "suit-fabric",
+    fabricCollection[0]
+  );
+
+  const [custmoisedShirtLook, setCustomisedShirtLook] = useSessionStorage(
+    "shirt-look",
+    shirtFabric[0]
+  );
+
+  const [shirt, setShirt] = useSessionStorage("", {
+    fabric: "",
+    color: "",
+    collar: "",
+    cuff: "",
+    button: "",
+  });
+  const [trouser, setTrouser] = useSessionStorage("trouser", {
+    fold: "",
+    cuff: "",
+    rise: "",
+    sideAdjuster: "",
+  });
+
+  const [needMeasure, setNeedMeasure] = useSessionStorage("measure", false);
+  const [needShirt, setNeedShirt] = useSessionStorage("needShirt", true);
+
+  const [billItems, setBillItems] = useSessionStorage("billItems", [
     {
       item: "Fabric Cost",
+      cost: "",
+    },
+    {
+      item: "Shirt",
       cost: "",
     },
     {
       item: "Tailor",
       cost: "1999.99",
     },
+
     {
       item: "GST",
       cost: "236.50",
     },
   ]);
+  const [subTotal, setSubTotal] = useSessionStorage("subtotal", 0);
+  const [total, setTotal] = useSessionStorage("total", 0);
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -63,6 +144,7 @@ export const AppProvider = ({ children }) => {
   const closeFilter = () => {
     setIsFilterOpen(false);
   };
+
   const openFilter = () => {
     if (isFilterOpen === true) {
       setIsFilterOpen(false);
@@ -71,8 +153,26 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  //shirt color
-  const [shirtColor, setShirtColor] = useState("");
+  const showMore = (numberOfItems, arr) => {
+    if (numberOfItems + 4 <= arr.length) {
+      numberOfItems = numberOfItems + 4;
+      return numberOfItems;
+    } else {
+      return arr.length;
+    }
+  };
+
+  const [addons, setAddons] = useSessionStorage("addons", {
+    initials: "",
+    lining: "",
+    cummerbund: "",
+  });
+  const [selectedLiningIDs, setSelectedLiningIDs] = useState([0]);
+
+  const [needCummerbund, setNeedCummerbund] = useSessionStorage(
+    "cummerbund",
+    false
+  );
 
   return (
     <AppContext.Provider
@@ -99,12 +199,17 @@ export const AppProvider = ({ children }) => {
         filterbox,
         setIsFilterboxOpen,
 
+        designPage,
+        setDesignPage,
+
         checked,
         setChecked,
         selectedFilter,
         setSelectedFilter,
         fabricCollection,
         setFabricCollection,
+        selectedSuitFabricIds,
+        setSelectedSuitFabricIds,
         custmoisedLook,
         setCustomisedLook,
         needMeasure,
@@ -112,8 +217,62 @@ export const AppProvider = ({ children }) => {
         billItems,
         setBillItems,
 
-        shirtColor,
-        setShirtColor,
+        needShirt,
+        setNeedShirt,
+
+        custmoisedShirtLook,
+        setCustomisedShirtLook,
+
+        showMore,
+
+        shirt,
+        trouserImg,
+        setShirt,
+        setTrouserImg,
+
+        selectedShirtFabricIDs,
+        setSelectedShirtFabricIDs,
+        selectedShirtCollarIDs,
+        setSelectedShirtCollarIDs,
+        selectedShirtCuffIDs,
+        setSelectedShirtCuffIDs,
+        selectedShirtButtonIDs,
+        setSelectedShirtButtonIDs,
+
+        dropdownValue,
+        setdropdownValue,
+
+        trouserIds,
+        setTrouserIds,
+        trouser,
+        setTrouser,
+
+        jacketImg,
+        setJacketImg,
+        jacketIds,
+        setJacketIds,
+
+        jacket,
+        setJacket,
+        isThreePiece,
+        setIsThreePiece,
+        isTuxedo,
+        setIsTuxedo,
+        blazerInitials,
+        setBlazerInitials,
+
+        selectedLiningIDs,
+        setSelectedLiningIDs,
+        addons,
+        setAddons,
+        needCummerbund,
+        setNeedCummerbund,
+
+        Shirt,
+        subTotal,
+        setSubTotal,
+        total,
+        setTotal,
       }}
     >
       {children}

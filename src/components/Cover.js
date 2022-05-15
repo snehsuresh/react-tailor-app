@@ -5,7 +5,9 @@ import { useGobalContext } from "../context";
 import { Link } from "react-router-dom";
 
 export default function Cover() {
-  const { handleSubmenu } = useGobalContext();
+  localStorage.clear();
+  sessionStorage.clear();
+  const { handleSubmenu, setDesignPage } = useGobalContext();
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -30,14 +32,19 @@ export default function Cover() {
       <section className="cover-section-1">
         <h4 className="cover-grid-item-1">CUSTOM SUITS</h4>
         <p className="cover-grid-item-2">
-          Customize your Tailored Suit online choosing from more than 50
-          fabrics. Design your suit at _brand_name_ and forget about factory
-          made suits because all our suits are 100% made to measure suits.
+          Wear suits that flatter your physique. A made to measure Suit
+          communicates style and sophistication. Customize one at _brand_name_
+          choosing from more than 50 fabrics.
         </p>
 
-        <h5 className="cover-grid-item-3">starting ₹2,999</h5>
-        <button className="cover-grid-item-4 design-button">Design</button>
-        <Link to="/design" className="cover-grid-item-4 design-button">
+        <h5 className="cover-grid-item-3">starting ₹5,499</h5>
+        <Link
+          onClick={() => {
+            setDesignPage(0);
+          }}
+          to="/design"
+          className="cover-grid-item-4 design-button"
+        >
           Design
         </Link>
         <img className="cover-grid-item-5" src={logo} alt="logo" />

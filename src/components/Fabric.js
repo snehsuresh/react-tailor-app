@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SuitCustomizedLook from "./SuitCustomizedLook";
 import CustomizationDetail from "./CustomizationDetail";
 import { fabrics } from "../data";
@@ -21,17 +21,26 @@ function Fabric() {
     setFabricCollection,
     custmoisedLook,
     setCustomisedLook,
+    custmoisedShirtLook,
+    selectedSuitFabricIds,
+    setSelectedSuitFabricIds,
   } = useGobalContext();
 
   const imgRefs = useRef([]);
-  const [selection, setSelection] = useState(false);
-  const [selectedId, setSelectedId] = useState(0);
+
+  useEffect(() => {
+    if (selectedSuitFabricIds.length > 1) {
+      imgRefs.current[
+        selectedSuitFabricIds[selectedSuitFabricIds.length - 2]
+      ].style.removeProperty("transform");
+    }
+    imgRefs.current[
+      selectedSuitFabricIds[selectedSuitFabricIds.length - 1]
+    ].style.transform = "scale(1.03)";
+  }, [selectedSuitFabricIds]);
 
   const handleSelection = (id) => {
-    imgRefs.current[selectedId].style.removeProperty("transform");
-    imgRefs.current[id].style.transform = "scale(1.05)";
-    setSelectedId(id);
-    setSelection(true);
+    setSelectedSuitFabricIds([...selectedSuitFabricIds, id]);
   };
 
   const customisedSuits = (object) => {
@@ -88,11 +97,7 @@ function Fabric() {
               Filter
             </button>
 
-            <span>Choose Fabric</span>
-            {/* <label class="switch">
-              <input type="checkbox" />
-              <span class="slider"></span>
-            </label> */}
+            <span className="name">Choose Fabric</span>
           </div>
           <hr />
           <div className="selection">
@@ -105,13 +110,12 @@ function Fabric() {
             >
               <label>Filters</label>
               <ul className="filter-section">
-                {subFilters.map((subFilter) => {
+                {subFilters.map((subFilter, i) => {
                   const { filter, options } = subFilter;
                   return (
-                    <li className="filter-labels">
+                    <li key={i} className="filter-labels">
                       <span>{filter}</span>
-                      <div id={filter} className="filter-component">
-                        {/* {<Filterbox text={filter} />} */}
+                      <ul id={filter} className="filter-component">
                         {options.map((option, index) => {
                           return (
                             <li key={index} className="filter-option">
@@ -130,7 +134,7 @@ function Fabric() {
                             </li>
                           );
                         })}
-                      </div>
+                      </ul>
                     </li>
                   );
                 })}
@@ -171,8 +175,11 @@ function Fabric() {
             clear filter
           </button>
         </div>
-        <SuitCustomizedLook look={custmoisedLook} Img={false} />
-        <CustomizationDetail look={custmoisedLook} />
+        <SuitCustomizedLook look={custmoisedLook} />
+        <CustomizationDetail
+          look={custmoisedLook}
+          shirt={custmoisedShirtLook}
+        />
       </div>
     </>
   );

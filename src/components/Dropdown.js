@@ -2,16 +2,20 @@ import React from "react";
 
 function Dropdown({ values, state, handleFunction }) {
   return (
-    <div class="dropdown">
+    <div className="dropdown">
       <select
         name=""
-        class="dropdown-select"
+        className="dropdown-select"
         value={state}
         onChange={handleFunction}
       >
         <option value="">Select…</option>
-        {values.map((v) => {
-          return <option value={v}>{v}</option>;
+        {values.map((v, i) => {
+          return (
+            <option key={i} value={v}>
+              {v}
+            </option>
+          );
         })}
       </select>
     </div>

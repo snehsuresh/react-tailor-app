@@ -167,32 +167,32 @@ export const models = [
   {
     name: "two-piece",
     images: ["img1", "img2", "img3"],
-    image: require("./images/bond1.jpg"),
+    image: require("./images/3-models/bond1-min.jpg"),
   },
   {
     name: "three-piece",
     images: ["img1", "img2", "img3"],
-    image: require("./images/wick1.jpg"),
+    image: require("./images/3-models/wick1-min.jpg"),
   },
   {
     name: "tuxedo",
     images: ["img1", "img2", "img3"],
-    image: require("./images/hooda1.jpg"),
+    image: require("./images/3-models/hooda1-min.jpg"),
   },
 ];
 
 export const coverModels = [
   {
     id: 1,
-    image: require("./images/cover-models/1.webp"),
+    image: require("./images/cover-models/1-min.png"),
   },
   {
     id: 2,
-    image: require("./images/cover-models/2.webp"),
+    image: require("./images/cover-models/2-min.png"),
   },
   {
     id: 3,
-    image: require("./images/cover-models/3.webp"),
+    image: require("./images/cover-models/3-min.png"),
   },
 ];
 
@@ -234,7 +234,7 @@ export const reviews = [
     image: require("./images/reviewers/jasleen.jpg"),
     name: "Jasleen Kaur",
     title: "Customer",
-    quote: "Owner's my boyfriend.",
+    quote: "Nice suits",
   },
 ];
 
@@ -459,23 +459,23 @@ export const subFilters = [
 
 export const customisedSuits = [
   {
-    color: "default",
+    name: "default",
     image: require("./images/customised/default.png"),
   },
   {
-    color: "blue",
+    name: "blue",
     image: require("./images/customised/darkgrey.png"),
   },
   {
-    color: "black",
+    name: "black",
     image: require("./images/customised/black.png"),
   },
   {
-    color: "grey",
+    name: "grey",
     image: require("./images/customised/grey.png"),
   },
   {
-    color: "white",
+    name: "white",
     image: require("./images/customised/white.png"),
   },
 ];
@@ -483,8 +483,10 @@ export const customisedSuits = [
 export const shirtFabric = [
   {
     type: "Oxford",
+    about:
+      "This material is coarse, yet comfortable, woven in a basket-weave type texture. Oxfords are commonly found in button-down styles, originally designed to be worn without a tie.",
     image: require("./images/shirt-fabric/oxford.webp"),
-    price: "500.00",
+    price: "1199.00",
     color: [
       {
         name: "black",
@@ -506,8 +508,10 @@ export const shirtFabric = [
   },
   {
     type: "Poplin",
+    about:
+      "The soft feel and comfortable wear of poplin makes it a great choice for leisurewear or casual apparel. Poplin has a smooth texture and is a lightweight textile.",
     image: require("./images/shirt-fabric/poplin.webp"),
-    price: "450.00",
+    price: "999.00",
     color: [
       {
         name: "black",
@@ -529,8 +533,10 @@ export const shirtFabric = [
   },
   {
     type: "Twill",
+    about:
+      "Twill is woven diagonally, creating a shiny or textured surface and thicker weave, which drapes well and is crease resistant. Herringbone twill has a distinctive pattern that is ideal for a shirt or suit.",
     image: require("./images/shirt-fabric/twill.webp"),
-    price: "650.00",
+    price: "1499.00",
     color: [
       {
         name: "black",
@@ -557,5 +563,301 @@ export const shirtFabric = [
         colorImg: require("./images/shirt-fabric/twill/white.webp"),
       },
     ],
+  },
+  {
+    type: "Broadcloth",
+    about:
+      "The weave is tight, creating a crisp look that is soft on the skin. The dense fibers hold up to regular wear, and threads are woven in an over-under pattern that often presents as a solid color to the eye.",
+    image: require("./images/shirt-fabric/broadcloth.jpg"),
+    price: "2599.00",
+    color: [
+      {
+        name: "black",
+        colorImg: require("./images/shirt-fabric/twill/black.webp"),
+      },
+      {
+        name: "blue",
+        colorImg: require("./images/shirt-fabric/twill/blue.webp"),
+      },
+      {
+        name: "navy",
+        colorImg: require("./images/shirt-fabric/twill/navy.webp"),
+      },
+      {
+        name: "turqoise",
+        colorImg: require("./images/shirt-fabric/twill/turqoise.webp"),
+      },
+      {
+        name: "vintage",
+        colorImg: require("./images/shirt-fabric/twill/vintage.webp"),
+      },
+      {
+        name: "white",
+        colorImg: require("./images/shirt-fabric/twill/white.webp"),
+      },
+    ],
+  },
+];
+
+export const collars = [
+  //https://propercloth.com/reference/dress-shirt-collar-styles/
+  {
+    name: "Straight",
+    image: require("./images/collars/straight.jpg"),
+  },
+  {
+    name: "band",
+    image: require("./images/collars/band.jpg"),
+  },
+  {
+    name: "Button Down",
+    image: require("./images/collars/buttondown.jpg"),
+  },
+  {
+    name: "Club",
+    image: require("./images/collars/club.jpg"),
+  },
+  {
+    name: "Cutaway",
+    image: require("./images/collars/cutaway.jpg"),
+  },
+  // {
+  //   name: "English",
+  //   image: require("./images/collars/english.webp"),
+  // },
+  {
+    name: "Hidden Button",
+    image: require("./images/collars/hiddenbutton.jpg"),
+  },
+  {
+    name: "Spread",
+    image: require("./images/collars/spread.jpg"),
+  },
+  {
+    name: "Tab",
+    image: require("./images/collars/tab.jpg"),
+  },
+  {
+    name: "Wingtip",
+    image: require("./images/collars/wingtip.jpg"),
+  },
+];
+
+export const cuffs = [
+  //https://propercloth.com/reference/dress-shirt-cuff-styles/
+  {
+    name: "One Button Barrel",
+    image: require("./images/cuffs/onebuttonbarrel.jpg"),
+  },
+  {
+    name: "Long One Button Barrel",
+    image: require("./images/cuffs/longonebuttonbarrel.jpg"),
+  },
+  {
+    name: "One Button Mitered",
+    image: require("./images/cuffs/onebuttonmitered.jpg"),
+  },
+  {
+    name: "Two Button Rounded",
+    image: require("./images/cuffs/twobuttonrounded.jpg"),
+  },
+  {
+    name: "Two Button Mitered",
+    image: require("./images/cuffs/twobuttonmitered.jpg"),
+  },
+  {
+    name: "French",
+    image: require("./images/cuffs/french.jpg"),
+  },
+  {
+    name: "Rounded French",
+    image: require("./images/cuffs/roundedfrench.jpg"),
+  },
+  {
+    name: "Convertible French",
+    image: require("./images/cuffs/convertiblefrench.jpg"),
+  },
+  {
+    name: "Soft One Button",
+    image: require("./images/cuffs/softonebutton.jpg"),
+  },
+  {
+    name: "Soft Long One Button",
+    image: require("./images/cuffs/softlongonebutton.jpg"),
+  },
+  {
+    name: "Soft Two Button Sq.",
+    image: require("./images/cuffs/softtwobuttonsquare.jpg"),
+  },
+  {
+    name: "Soft French",
+    image: require("./images/cuffs/softfrench.jpg"),
+  },
+];
+
+export const buttons = [
+  {
+    name: "Flat Button",
+    image: require("./images/buttons/flatbutton.webp"),
+  },
+  {
+    name: "Lapel Button",
+    image: require("./images/buttons/lapelbutton.webp"),
+  },
+  {
+    name: "Snap Button",
+    image: require("./images/buttons/snapbutton.jpg"),
+  },
+  {
+    name: "Tuxedo Stud",
+    image: require("./images/buttons/tuxedostud.jpg"),
+  },
+];
+
+export const folds = [
+  {
+    name: "Flat Front/None",
+    image: require("./images/suit-trouser/slim-suit.jpg"),
+  },
+  {
+    name: "Single Pleat",
+    image: require("./images/suit-trouser/singlepleat-suit.jpg"),
+  },
+  {
+    name: "Double Pleat",
+    image: require("./images/suit-trouser/doublepleat-suit.jpg"),
+  },
+];
+
+export const rise = [
+  {
+    name: "High Rise",
+    image: require("./images/suit-trouser/high-waisted.png"),
+  },
+  {
+    name: "Mid Rise",
+    image: require("./images/suit-trouser/midrise.jpg"),
+  },
+  {
+    name: "Low Rise",
+    image: require("./images/suit-trouser/lowrise.jpg"),
+  },
+];
+
+export const trousercuff = [
+  {
+    name: "Yes",
+    image: require("./images/suit-trouser/cuffed-suit.jpg"),
+  },
+  {
+    name: "No",
+    image: require("./images/suit-trouser/nocuff-suit.jpg"),
+  },
+];
+
+export const sideadjuster = [
+  {
+    name: "Yes",
+    image: require("./images/suit-trouser/side-adjuster.jpg"),
+  },
+  {
+    name: "No",
+    image: require("./images/suit-trouser/slim-suit.jpg"),
+  },
+];
+
+export const jacketStyle = [
+  {
+    name: "Single-Breasted",
+    image: require("./images/jacket/single-breast-jacket.png"),
+  },
+  {
+    name: "Double-Breasted",
+    image: require("./images/jacket/double-breast-jacket.png"),
+  },
+  {
+    name: "Mandarin",
+    image: require("./images/jacket/mandarin-jacket.png"),
+  },
+  {
+    name: "Contemporary Tuxedo",
+    image: require("./images/jacket/tuxedo-jacket.png"),
+  },
+];
+
+export const lapels = [
+  {
+    name: "Notch",
+    image: require("./images/jacket/single-breast-jacket.png"),
+  },
+  {
+    name: "Peak",
+    image: require("./images/jacket/single-breast-jacket.png"),
+  },
+];
+
+export const vests = [
+  {
+    name: "2-piece",
+    image: require("./images/jacket/single-breast-jacket.png"),
+  },
+  {
+    name: "3-piece",
+    image: require("./images/jacket/3-piece-jacket.png"),
+  },
+];
+
+export const wasitcoats = [
+  {
+    name: "Single breasted",
+    image: require("./images/jacket/wasitcoat-single.png"),
+  },
+  {
+    name: "Double breasted",
+    image: require("./images/jacket/waistcoat-double.png"),
+  },
+];
+
+export const jacketBack = [
+  {
+    name: "Centre Vent",
+    image: require("./images/jacket/single-breast-jacket.png"),
+  },
+  {
+    name: "Side Vent",
+    image: require("./images/jacket/single-breast-jacket.png"),
+  },
+];
+
+export const linings = [
+  {
+    name: "default",
+    image: require("./images/lining/default.png"),
+    price: "0",
+  },
+  {
+    name: "blue",
+    image: require("./images/lining/blue.jpg"),
+    price: "1499.00",
+  },
+  {
+    name: "red",
+    image: require("./images/lining/red.jpg"),
+    price: "1799.00",
+  },
+  {
+    name: "purple",
+    image: require("./images/lining/purple.jpg"),
+    price: "1299.00",
+  },
+  {
+    name: "violet",
+    image: require("./images/lining/violet.jpg"),
+    price: "1899.00",
+  },
+  {
+    name: "black",
+    image: require("./images/lining/black.jpg"),
+    price: "1199.00",
   },
 ];
