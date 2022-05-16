@@ -62,8 +62,8 @@ function PickLining() {
   const {
     addons,
     setAddons,
-    selectedLiningIDs,
-    setSelectedLiningIDs,
+    selectedLiningID,
+    setSelectedLiningID,
     billItems,
     setBillItems,
   } = useGobalContext();
@@ -74,25 +74,24 @@ function PickLining() {
   const imgRefs = useRef([]);
 
   useEffect(() => {
-    if (selectedLiningIDs.length > 1) {
-      imgRefs.current[
-        selectedLiningIDs[selectedLiningIDs.length - 2]
-      ].style.removeProperty("transform");
+    let element = document.getElementById("cbli".concat(selectedLiningID));
+    if (element != null) {
+      element.checked = true;
     }
-    imgRefs.current[
-      selectedLiningIDs[selectedLiningIDs.length - 1]
-    ].style.transform = "scale(1.03)";
-  }, [selectedLiningIDs]);
+  });
 
-  const handleSelection = (e, id, lining) => {
-    setSelectedLiningIDs([...selectedLiningIDs, id]);
+  const handleSelection = (id, lining) => {
+    setSelectedLiningID(id);
 
     setAddons({ ...addons, lining: lining.name });
     const newItems = billItems.filter((a) => {
       return a.item !== "Lining";
     });
-    if (billItems.some((b) => b.item === "Lining")) {
-      setBillItems([...newItems]);
+    if (lining.name === "default") {
+      const newItems = billItems.filter((a) => {
+        return a.item !== "Lining";
+      });
+      setBillItems(newItems);
     } else {
       setBillItems([
         ...newItems,
@@ -102,12 +101,6 @@ function PickLining() {
         },
       ]);
     }
-    if (lining.name === "default") {
-      const newItems = billItems.filter((a) => {
-        return a.item !== "Lining";
-      });
-      setBillItems(newItems);
-    }
   };
 
   const getMore = () => {
@@ -115,24 +108,24 @@ function PickLining() {
   };
 
   return (
-    <div className="selection">
+    <ul className="selection">
       {linings.slice(0, numberOfitemsShown).map((lining, i) => {
         const { name, image } = lining;
         return (
-          <article
-            key={i}
-            className="fabric"
-            onClick={(e) => handleSelection(e, i, lining)}
-          >
-            <div className="centered-text-grid name">{name}</div>
-            <img
-              src={image}
-              className="fabric-img"
-              id={i}
-              alt={name}
+          <li key={i} className="fabric">
+            <input
+              type="radio"
+              // id="cb1"
+              id={`cbli${i}`}
+              name={"liningradio"}
+              onChange={() => handleSelection(i, lining)}
               ref={(el) => (imgRefs.current[i] = el)}
             />
-          </article>
+            <label htmlFor={`cbli${i}`}>
+              <div className="centered-text-grid  name">{name}</div>
+              <img className="fabric-img" src={image} />
+            </label>
+          </li>
         );
       })}
       <article className="fabric">
@@ -145,7 +138,7 @@ function PickLining() {
           +
         </button>
       </article>
-    </div>
+    </ul>
   );
 }
 

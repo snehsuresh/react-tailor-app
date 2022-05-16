@@ -1,10 +1,3 @@
-// import logo from "./logo.svg";
-
-// import Submenu from "./Submenu";
-// import ThreeModels from "./ThreeModels";
-// import Cover from "./Cover";
-// import Reviews from "./Reviews";
-// import Submenusuits from "./SubmenuContent";
 import Navbar from "./components/Navbar";
 import { models } from "./data";
 
@@ -17,6 +10,8 @@ import Checkout from "./pages/Checkout";
 import DesignPage from "./pages/DesignPage";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
+import ComingSoon from "./pages/ComingSoon";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -25,7 +20,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
-
+          <Route path="/comingsoon" element={<ComingSoon />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/design" element={<DesignPage />} />
           <Route path="/error" element={<Error />} />
           <Route path="/cart" element={<Cart />} />

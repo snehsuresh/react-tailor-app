@@ -13,8 +13,8 @@ function Fabric() {
     isFilterOpen,
     closeFilter,
     openFilter,
-    checked,
-    setChecked,
+    filterChecked,
+    setFilterChecked,
     selectedFilter,
     setSelectedFilter,
     fabricCollection,
@@ -22,33 +22,30 @@ function Fabric() {
     custmoisedLook,
     setCustomisedLook,
     custmoisedShirtLook,
-    selectedSuitFabricIds,
-    setSelectedSuitFabricIds,
+    selectedSuitFabricId,
+    setSelectedSuitFabricId,
   } = useGobalContext();
+
+  useEffect(() => {
+    let element = document.getElementById("cb".concat(selectedSuitFabricId));
+    if (element != null) {
+      element.checked = true;
+    }
+  });
 
   const imgRefs = useRef([]);
 
-  useEffect(() => {
-    if (selectedSuitFabricIds.length > 1) {
-      imgRefs.current[
-        selectedSuitFabricIds[selectedSuitFabricIds.length - 2]
-      ].style.removeProperty("transform");
-    }
-    imgRefs.current[
-      selectedSuitFabricIds[selectedSuitFabricIds.length - 1]
-    ].style.transform = "scale(1.03)";
-  }, [selectedSuitFabricIds]);
-
   const handleSelection = (id) => {
-    setSelectedSuitFabricIds([...selectedSuitFabricIds, id]);
+    setSelectedSuitFabricId(id);
   };
 
   const customisedSuits = (object) => {
     setCustomisedLook(object);
   };
+
   const handleToggle = (value, filter) => {
-    const currentChecked = checked.indexOf(value);
-    const newChecked = [...checked];
+    const currentChecked = filterChecked.indexOf(value);
+    const newChecked = [...filterChecked];
     const newFilter = [...selectedFilter];
     if (currentChecked === -1) {
       newChecked.push(value);
@@ -57,7 +54,7 @@ function Fabric() {
       newChecked.splice(currentChecked, 1);
       newFilter.splice(currentChecked, 1);
     }
-    setChecked(newChecked);
+    setFilterChecked(newChecked);
     setSelectedFilter(newFilter);
   };
 
@@ -77,12 +74,12 @@ function Fabric() {
   const handleFilter = () => {
     const newFilters = {};
     selectedFilter.forEach((element, index) => {
-      newFilters[element.toLowerCase()] = checked[index].toLowerCase();
+      newFilters[element.toLowerCase()] = filterChecked[index].toLowerCase();
     });
     showFilteredResults(newFilters);
   };
 
-  const handleClick = (fabric, id) => {
+  const handleFabricToggle = (fabric, id) => {
     customisedSuits(fabric);
     handleSelection(id);
   };
@@ -100,7 +97,7 @@ function Fabric() {
             <span className="name">Choose Fabric</span>
           </div>
           <hr />
-          <div className="selection">
+          <div>
             <aside
               className={`${
                 isFilterOpen
@@ -124,7 +121,7 @@ function Fabric() {
                                   onChange={() => handleToggle(option, filter)}
                                   type="checkbox"
                                   checked={
-                                    checked.indexOf(option) === -1
+                                    filterChecked.indexOf(option) === -1
                                       ? false
                                       : true
                                   }
@@ -146,30 +143,41 @@ function Fabric() {
                 Apply
               </button>
             </aside>
-            {fabricCollection.map((fabric, index) => {
-              const { name, image } = fabric;
-              return (
-                <article
-                  className="fabric"
-                  key={index}
-                  onClick={() => handleClick(fabric, index)}
-                >
-                  <div className="centered-text-grid name">{name}</div>
-                  <img
-                    className="fabric-img"
-                    src={image}
-                    alt={name}
-                    id={index}
-                    ref={(el) => (imgRefs.current[index] = el)}
-                  />
-                </article>
-              );
-            })}
+
+            <ul className="selection">
+              {fabricCollection.map((fabric, index) => {
+                const { name, image } = fabric;
+                return (
+                  <>
+                    <li key={index} className="fabric">
+                      <input
+                        type="radio"
+                        // id="cb1"
+                        id={`cb${index}`}
+                        name={"fabricradio"}
+                        onChange={() => handleFabricToggle(fabric, index)}
+                        ref={(el) => (imgRefs.current[index] = el)}
+                      />
+                      <label htmlFor={`cb${index}`}>
+                        <div className="centered-text-grid  name">{name}</div>
+                        <img
+                          style={{
+                            height: "2.5rem",
+                          }}
+                          className="fabric-img"
+                          src={image}
+                        />
+                      </label>
+                    </li>
+                  </>
+                );
+              })}
+            </ul>
           </div>
           <button
             onClick={() => {
               setFabricCollection(fabrics);
-              setChecked([]);
+              setFilterChecked([]);
             }}
           >
             clear filter

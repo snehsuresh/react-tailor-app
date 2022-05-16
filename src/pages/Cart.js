@@ -2,6 +2,8 @@ import React from "react";
 import { useGobalContext } from "../context";
 import Suit from "../images/suit-cart.png";
 import Submenu from "../components/Submenu";
+import Socialmenu from "../components/Socialmenu";
+import Subcart from "../components/Subcart";
 import SuitStyle from "../components/SuitStyle";
 import { Link } from "react-router-dom";
 import DesignPage from "./DesignPage";
@@ -45,6 +47,8 @@ function Cart() {
   return (
     <>
       <Submenu />
+      <Socialmenu />
+      <Subcart />
       <div className="cart-page">
         <div className="cart-header">
           {/* <YouTube videoId="wcA9_bPfFuU" playing={true} /> */}

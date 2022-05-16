@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useGobalContext } from "../context";
 
 const SubmenuContent = ({ props }) => {
   let { text, content } = props;
+  const { closeSubmenu } = useGobalContext();
 
   return (
     <>
@@ -11,10 +14,17 @@ const SubmenuContent = ({ props }) => {
           {content.images.map((image, id) => {
             return (
               <div className="submenu-image-container" key={id}>
-                <img className="submenu-image" src={image} alt="h" />
-                <figcaption className="submenu-tag">
-                  {content.tags[id]}
-                </figcaption>
+                <Link to="/comingsoon">
+                  <img
+                    className="submenu-image"
+                    src={image}
+                    alt="h"
+                    onClick={() => closeSubmenu()}
+                  />
+                  <figcaption className="submenu-tag">
+                    {content.tags[id]}
+                  </figcaption>
+                </Link>
               </div>
             );
           })}

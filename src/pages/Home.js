@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import Submenu from "../components/Submenu";
+import Socialmenu from "../components/Socialmenu";
+import Subcart from "../components/Subcart";
 import ThreeModels from "../components/ThreeModels";
 import Cover from "../components/Cover";
 import Reviews from "../components/Reviews";
@@ -39,6 +41,8 @@ const Home = () => {
       {imgsLoaded ? (
         <>
           <Submenu />
+          <Socialmenu />
+          <Subcart />
           <Cover />
           <ThreeModels props={{ imgsLoaded }} />
           <Reviews />

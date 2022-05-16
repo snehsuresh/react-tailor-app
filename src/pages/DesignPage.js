@@ -3,6 +3,8 @@ import Fabric from "../components/Fabric";
 import SuitStyle from "../components/SuitStyle";
 import SuitAddons from "../components/SuitAddons";
 import Submenu from "../components/Submenu";
+import Socialmenu from "../components/Socialmenu";
+import Subcart from "../components/Subcart";
 import { useGobalContext } from "../context";
 import { Link } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -26,6 +28,8 @@ const DesignPage = () => {
   return (
     <>
       <Submenu />
+      <Socialmenu />
+      <Subcart />
       <div className="design">
         <div className="progress-bar">
           {designTitles.map((item, index) => {

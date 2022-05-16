@@ -43,6 +43,7 @@ function MultistepShirt() {
             />
           </span>
         </p>
+
         <div className="class-title">Fabric</div>
         <PickFabric />
         <div className="class-title">Color</div>
@@ -63,53 +64,215 @@ function PickFabric() {
     shirt,
     setShirt,
     setCustomisedShirtLook,
-    selectedShirtFabricIDs,
-    setSelectedShirtFabricIDs,
+    selectedShirtFabricID,
+    setSelectedShirtFabricID,
   } = useGobalContext();
 
   const imgRefs = useRef([]);
 
   useEffect(() => {
-    if (selectedShirtFabricIDs.length > 1) {
-      imgRefs.current[
-        selectedShirtFabricIDs[selectedShirtFabricIDs.length - 2]
-      ].style.removeProperty("transform");
+    let element = document.getElementById("cbs".concat(selectedShirtFabricID));
+    if (element != null) {
+      element.checked = true;
     }
-    imgRefs.current[
-      selectedShirtFabricIDs[selectedShirtFabricIDs.length - 1]
-    ].style.transform = "scale(1.03)";
-  }, [selectedShirtFabricIDs]);
+  });
   const handleSelection = (id, fab) => {
     setCustomisedShirtLook(fab);
-    setSelectedShirtFabricIDs([...selectedShirtFabricIDs, id]);
-
+    setSelectedShirtFabricID(id);
     setShirt({ ...shirt, fabric: fab.type });
   };
 
   return (
-    <div className="selection">
+    <ul className="selection">
       {shirtFabric.map((fabric, i) => {
         const { type, image, color } = fabric;
         return (
-          <article
-            key={i}
-            className="fabric"
-            onClick={() => handleSelection(i, fabric)}
-          >
-            <div className="centered-text-grid name">{type}</div>
-            <img
-              src={image}
-              className="fabric-img"
-              id={i}
-              alt={type}
-              ref={(el) => (imgRefs.current[i] = el)}
-            />
-          </article>
+          <>
+            <li key={i} className="fabric">
+              <input
+                type="radio"
+                // id="cb1"
+                id={`cbs${i}`}
+                name={"shirtfabricradio"}
+                onChange={() => handleSelection(i, fabric)}
+                ref={(el) => (imgRefs.current[i] = el)}
+              />
+              <label htmlFor={`cbs${i}`}>
+                <div className="centered-text-grid  name">{type}</div>
+                <img className="fabric-img" src={image} />
+              </label>
+            </li>
+          </>
         );
       })}
-    </div>
+    </ul>
   );
 }
+
+function PickCollar() {
+  const { shirt, setShirt, selectedShirtCollarID, setSelectedShirtCollarID } =
+    useGobalContext();
+  const { showMore } = useGobalContext();
+  const [numberOfitemsShown, setNumberOfItemsShows] = useState(3);
+  const imgRefs = useRef([]);
+  const [collarArr, setCollarArr] = useState(collars);
+
+  useEffect(() => {
+    let element = document.getElementById("cbco".concat(selectedShirtCollarID));
+    console.log(element);
+    if (element != null) {
+      element.checked = true;
+    }
+  });
+  const handleSelection = (id, name) => {
+    setSelectedShirtCollarID(id);
+    setShirt({ ...shirt, collar: name });
+  };
+
+  const getMore = () => {
+    setNumberOfItemsShows(showMore(numberOfitemsShown, collarArr));
+  };
+
+  return (
+    <ul className="selection">
+      {collars.slice(0, numberOfitemsShown).map((collar, i) => {
+        const { name, image } = collar;
+        return (
+          <li key={i} className="fabric">
+            <input
+              type="radio"
+              // id="cb1"
+              id={`cbco${i}`}
+              name={"shirtcollarradio"}
+              onChange={() => handleSelection(i, name)}
+              ref={(el) => (imgRefs.current[i] = el)}
+            />
+            <label htmlFor={`cbco${i}`}>
+              <div className="centered-text-grid  name">{name}</div>
+              <img className="fabric-img" src={image} />
+            </label>
+          </li>
+        );
+      })}
+      <article className="fabric">
+        <button
+          className="circle-stroke"
+          type="button"
+          disabled={false}
+          onClick={() => getMore()}
+        >
+          +
+        </button>
+      </article>
+    </ul>
+  );
+}
+
+function PickCuff() {
+  const {
+    shirt,
+    setShirt,
+    selectedShirtCuffID,
+    setSelectedShirtCuffID,
+    showMore,
+  } = useGobalContext();
+
+  const [numberOfitemsShown, setNumberOfItemsShows] = useState(3);
+
+  const [cuffArr, setCollarArr] = useState(cuffs);
+
+  const imgRefs = useRef([]);
+
+  useEffect(() => {
+    let element = document.getElementById("cbcu".concat(selectedShirtCuffID));
+    if (element != null) {
+      element.checked = true;
+    }
+  });
+  const handleSelection = (id, name) => {
+    setSelectedShirtCuffID(id);
+    setShirt({ ...shirt, cuff: name });
+  };
+
+  const getMore = () => {
+    setNumberOfItemsShows(showMore(numberOfitemsShown, cuffArr));
+  };
+  return (
+    <ul className="selection">
+      {cuffs.slice(0, numberOfitemsShown).map((cuff, i) => {
+        const { name, image } = cuff;
+        return (
+          <li key={i} className="fabric">
+            <input
+              type="radio"
+              // id="cb1"
+              id={`cbcu${i}`}
+              name={"shirtcuffradio"}
+              onChange={() => handleSelection(i, name)}
+              ref={(el) => (imgRefs.current[i] = el)}
+            />
+            <label htmlFor={`cbcu${i}`}>
+              <div className="centered-text-grid  name">{name}</div>
+              <img className="fabric-img" src={image} />
+            </label>
+          </li>
+        );
+      })}
+      <article className="fabric">
+        <button
+          className="circle-stroke"
+          type="button"
+          disabled={false}
+          onClick={() => getMore()}
+        >
+          +
+        </button>
+      </article>
+    </ul>
+  );
+}
+
+function PickButton() {
+  const { shirt, setShirt, selectedShirtButtonID, setSelectedShirtButtonID } =
+    useGobalContext();
+  const imgRefs = useRef([]);
+
+  useEffect(() => {
+    let element = document.getElementById("cbbu".concat(selectedShirtButtonID));
+    if (element != null) {
+      element.checked = true;
+    }
+  });
+  const handleSelection = (id, name) => {
+    setSelectedShirtButtonID(id);
+    setShirt({ ...shirt, button: name });
+  };
+
+  return (
+    <ul className="selection">
+      {buttons.map((button, i) => {
+        const { name, image } = button;
+        return (
+          <li key={i} className="fabric">
+            <input
+              type="radio"
+              // id="cb1"
+              id={`cbbu${i}`}
+              name={"shirtbuttonradio"}
+              onChange={() => handleSelection(i, name)}
+              ref={(el) => (imgRefs.current[i] = el)}
+            />
+            <label htmlFor={`cbbu${i}`}>
+              <div className="centered-text-grid  name">{name}</div>
+              <img className="fabric-img" src={image} />
+            </label>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 function PickColor() {
   const { shirt, setShirt } = useGobalContext();
   const colorRefs = useRef([]);
@@ -213,182 +376,6 @@ function PickColor() {
               onClick={() => handleColorSelection(index, filter, name)}
             ></label>
           </div>
-        );
-      })}
-    </div>
-  );
-}
-function PickCollar() {
-  const { shirt, setShirt, selectedShirtCollarIDs, setSelectedShirtCollarIDs } =
-    useGobalContext();
-  const { showMore } = useGobalContext();
-  const [numberOfitemsShown, setNumberOfItemsShows] = useState(3);
-  const imgRefs = useRef([]);
-  const [collarArr, setCollarArr] = useState(collars);
-  const [selectedId, setSelectedId] = useState(0);
-
-  useEffect(() => {
-    if (selectedShirtCollarIDs.length > 1) {
-      imgRefs.current[
-        selectedShirtCollarIDs[selectedShirtCollarIDs.length - 2]
-      ].style.removeProperty("transform");
-    }
-    imgRefs.current[
-      selectedShirtCollarIDs[selectedShirtCollarIDs.length - 1]
-    ].style.transform = "scale(1.03)";
-  }, [selectedShirtCollarIDs]);
-  const handleSelection = (id, name) => {
-    setSelectedShirtCollarIDs([...selectedShirtCollarIDs, id]);
-
-    setShirt({ ...shirt, collar: name });
-  };
-
-  const getMore = () => {
-    setNumberOfItemsShows(showMore(numberOfitemsShown, collarArr));
-  };
-
-  return (
-    <div className="selection">
-      {collars.slice(0, numberOfitemsShown).map((collar, i) => {
-        const { name, image } = collar;
-        return (
-          <article
-            key={i}
-            className="fabric"
-            onClick={() => handleSelection(i, name)}
-          >
-            <div className="centered-text-grid name">{name}</div>
-            <img
-              src={image}
-              className="fabric-img"
-              id={i}
-              alt={name}
-              ref={(el) => (imgRefs.current[i] = el)}
-            />
-          </article>
-        );
-      })}
-      <article className="fabric">
-        <button
-          className="circle-stroke"
-          type="button"
-          disabled={false}
-          onClick={() => getMore()}
-        >
-          +
-        </button>
-      </article>
-    </div>
-  );
-}
-
-function PickCuff() {
-  const {
-    shirt,
-    setShirt,
-    selectedShirtCuffIDs,
-    setSelectedShirtCuffIDs,
-    showMore,
-  } = useGobalContext();
-
-  const [numberOfitemsShown, setNumberOfItemsShows] = useState(3);
-
-  const [cuffArr, setCollarArr] = useState(cuffs);
-
-  const imgRefs = useRef([]);
-
-  useEffect(() => {
-    if (selectedShirtCuffIDs.length > 1) {
-      imgRefs.current[
-        selectedShirtCuffIDs[selectedShirtCuffIDs.length - 2]
-      ].style.removeProperty("transform");
-    }
-    imgRefs.current[
-      selectedShirtCuffIDs[selectedShirtCuffIDs.length - 1]
-    ].style.transform = "scale(1.03)";
-  }, [selectedShirtCuffIDs]);
-  const handleSelection = (id, name) => {
-    setSelectedShirtCuffIDs([...selectedShirtCuffIDs, id]);
-    setShirt({ ...shirt, cuff: name });
-  };
-
-  const getMore = () => {
-    setNumberOfItemsShows(showMore(numberOfitemsShown, cuffArr));
-  };
-  return (
-    <div className="selection">
-      {cuffs.slice(0, numberOfitemsShown).map((cuff, i) => {
-        const { name, image } = cuff;
-        return (
-          <article
-            key={i}
-            className="fabric"
-            onClick={() => handleSelection(i, name)}
-          >
-            <div className="centered-text-grid name">{name}</div>
-            <img
-              src={image}
-              className="fabric-img"
-              id={i}
-              alt={name}
-              ref={(el) => (imgRefs.current[i] = el)}
-            />
-          </article>
-        );
-      })}
-      <article className="fabric">
-        <button
-          className="circle-stroke"
-          type="button"
-          disabled={false}
-          onClick={() => getMore()}
-        >
-          +
-        </button>
-      </article>
-    </div>
-  );
-}
-
-function PickButton() {
-  const { shirt, setShirt, selectedShirtButtonIDs, setSelectedShirtButtonIDs } =
-    useGobalContext();
-  const imgRefs = useRef([]);
-
-  useEffect(() => {
-    if (selectedShirtButtonIDs.length > 1) {
-      imgRefs.current[
-        selectedShirtButtonIDs[selectedShirtButtonIDs.length - 2]
-      ].style.removeProperty("transform");
-    }
-    imgRefs.current[
-      selectedShirtButtonIDs[selectedShirtButtonIDs.length - 1]
-    ].style.transform = "scale(1.03)";
-  }, [selectedShirtButtonIDs]);
-  const handleSelection = (id, name) => {
-    setSelectedShirtButtonIDs([...selectedShirtButtonIDs, id]);
-    setShirt({ ...shirt, button: name });
-  };
-
-  return (
-    <div className="selection">
-      {buttons.map((button, i) => {
-        const { name, image } = button;
-        return (
-          <article
-            key={i}
-            className="fabric"
-            onClick={() => handleSelection(i, name)}
-          >
-            <div className="centered-text-grid name">{name}</div>
-            <img
-              src={image}
-              className="fabric-img"
-              id={i}
-              alt={name}
-              ref={(el) => (imgRefs.current[i] = el)}
-            />
-          </article>
         );
       })}
     </div>

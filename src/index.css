@@ -201,6 +201,7 @@ Navbar
   /* gap: 0.25rem 2rem; */
 }
 
+
 ul.submenu-tips {
   list-style-type: square;
   font-family: var(--josefin);
@@ -230,7 +231,7 @@ ul.submenu-tips {
 .submenu h4 {
   margin-bottom: 1.5rem;
 }
-.submenu-center a {
+.submenu-links {
   display: block;
   cursor: pointer;
   font-family: var(--josefin);
@@ -635,6 +636,7 @@ Sub-submenu
   opacity: 0.9;
   margin-bottom: -1em;
   transform: translate(0%, -14%);
+  cursor: pointer;
 }
 
 .submenu-header {
@@ -708,7 +710,7 @@ Design
   display: flex;
 }
 
-article.fabric {
+.fabric {
   height: 7em;
   margin: 2px;
   cursor: pointer;
@@ -720,12 +722,13 @@ article.fabric {
 }
 
 img.fabric-img {
-  height: 100%;
-  width: 100%;
   border-radius: 4px;
   background-color: #505050;
   /* box-shadow: 0; */
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
 }
+
 
 .design-content {
   display: flex;
@@ -1540,10 +1543,7 @@ tr.order-total {
   color: #707070;
 }
 
-label {
-  padding-bottom: 5px;
-  font-size: 13px;
-}
+
 
 /* input {
   margin-top: 3px;
@@ -1843,23 +1843,20 @@ li {
   display: inline-block;
 } */
 
-input[type="checkbox"][id^="cb"] {
+input[type="radio"][id^="cb"] {
   display: none;
 }
 
 label {
+  padding-bottom: 5px;
+  font-size: 13px;
   border: 1px solid #fff;
   padding: 10px;
   display: block;
   position: relative;
   margin: 10px;
   cursor: pointer;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+
 }
 
 label::before {
@@ -1902,3 +1899,327 @@ label img {
   box-shadow: 0 0 5px #333;
   z-index: -1;
 }
+
+li.social-icon {
+    padding: 10px;
+}
+
+
+
+
+
+/* links */
+.socialmenu {
+  background: black;
+    color: white;
+    font-family: var(--mont);
+
+  box-shadow: var(--light-shadow);
+  position: absolute;
+  top: 4rem;
+  left: 50%;
+  height: 16rem;
+    width: 13rem;
+    transform: translateX(-97%);
+  z-index: 3;
+  display: none;
+  padding: 0px 1rem;
+  border-radius: 3px;
+  transition: var(--transition);
+}
+.socialmenu::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--clr-white);
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.socialmenu.show {
+  display: block;
+}
+
+.socialmenu-center {
+  display: grid;
+  gap: 0.25rem 2rem;
+}
+.col-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.col-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.col-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.socialmenu h4 {
+  margin-bottom: 1.5rem;
+}
+.socialmenu-center a {
+  width: 100%;
+    display: block;
+    color: var(--clr-grey-1);
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    /* background: radial-gradient(black, transparent); */
+    /* background: #221e1e; */
+    padding: 0.5rem;
+}
+.socialmenu-center svg {
+  color: var(--clr-grey-5);
+  margin-right: 1rem;
+}
+
+/* Coming Soon page */
+.mobile-container {
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.hero-image-desktop {
+    display: none;
+}
+
+/* ---------- HERO BANNER DECLERATIONS ---------- */
+.hero-banner {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-banner .logo-wrapper {
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem 0;
+    width: auto;
+}
+    
+    .logo-wrapper img {
+        display: block;
+        height: 2.5rem;
+        margin: 0 auto;
+        width: auto;
+    }
+
+.hero-banner .hero-image {
+    background-image: url(https://images.lifestyleasia.com/wp-content/uploads/2018/12/27051901/Unreserved02169-1024x683.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 376px;
+    width: 100%;
+}
+
+/* ---------- TEXT INFO DECLERATIONS ---------- */
+.text-info {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+
+    .text-info > * {
+        padding: 0 2.5rem 1rem;
+    }
+
+    /* intended for the first h2 within .text-info */
+    .text-info h2:nth-child(1) {
+        color: var(--theme-color-red);
+        font-weight: normal;
+        
+    }
+
+    .text-info h2 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        color: var(--theme-color-brown);
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin: 18px;
+    }
+
+    .text-info p {
+        color: var(--theme-color-black);
+        line-height: 24px;
+    }
+
+    .text-info .email-signup {
+        margin: 1rem 0 6rem;
+        position: relative;
+        width: 100%;
+    }
+    
+        .email-signup .email-input {
+            border: 1px solid rgba(51, 51, 51, .7);
+            border-radius: 3px;
+            padding: 1rem 1.5rem;
+            opacity: .5;
+            width: 100%;
+        }
+
+        .email-signup .email-input:focus {
+            background-color: var(--theme-color-white);
+            outline: 2px solid var(--theme-color-black);
+            opacity: 1;
+        }
+
+        .email-signup .email-submit {
+            background-color: var(--theme-color-black);
+            border-bottom: 1px solid var(--theme-color-black);
+            border-radius: 2px;
+            color: var(--theme-color-white);
+            cursor: pointer;
+            font-weight: bold;
+            opacity: 1;
+            padding: 1rem 1.5rem;
+            position: absolute;
+            right: 0;
+            margin-right: 2.5rem;
+            z-index: 10;
+        }
+
+@media only screen and (min-width: 768px) {
+    main {
+        display: flex;
+        flex-direction: column;
+        height: inherit;
+        max-width: 100%;
+        margin: 0 auto;
+        padding-left: 3.5rem;
+    }
+
+    .coming-soon{
+      display: flex;
+    }
+
+    .hero-banner .logo-wrapper {
+        margin-left: 3.5rem;
+        width: 100%;
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+    }
+        .logo-wrapper img {
+            margin: 0 0 0;
+            padding-left: 2.5rem;
+        }
+
+    .hero-image {
+        display: none;
+    }
+
+    .text-info {
+        text-align: left;
+        align-items: start;
+    }
+    
+        .text-info h2 {
+            font-size: 4.5rem;
+        }
+
+        .text-info p {
+            font-size: 16px;
+        }
+
+        .text-info input {
+            font-size: 16px;
+        }
+  
+        .text-info .email-signup {
+            margin: 1rem 0 7rem;
+        }
+
+    .hero-image-desktop {
+        display: block;
+        height: 100%;
+
+    }
+
+    .hero-image-desktop img {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+  
+    .email-signup .email-submit {
+        border-bottom: 2px solid var(--theme-color-black);
+    }
+}
+
+/* LoginPage */
+
+
+/* form.register-form {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    justify-content: center;
+}
+
+.login-page {
+    display: flex;
+  
+    padding: 1rem;
+    justify-content: center;
+} */
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.login-form {
+     background: #FFFFFF;
+    max-width: 360px;
+
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 4%);
+}
+.login-form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.login-form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #000000;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.login-form button:hover,.login-form button:active,.login-form button:focus {
+  background: #43A047;
+}
+.login-form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.login-form .message a {
+  color: #000000;
+  text-decoration: none;
+}
+

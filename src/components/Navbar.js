@@ -1,12 +1,13 @@
 import React from "react";
 // import { FaBars, FaTwitter } from "react-icons/fa";
 import { useGobalContext } from "../context";
-import { social } from "../data";
 import logo from "../logo.svg";
 import { Link } from "react-router-dom";
+import { FaUserTie, FaShoppingBag, FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
-  const { openSubmenu, handleSubmenu } = useGobalContext();
+  const { openSubmenu, handleSubmenu, openSocialMenu, closeSocialMenu } =
+    useGobalContext();
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
     //finding the center and bottom of the button
@@ -14,6 +15,22 @@ const Navbar = () => {
     // const center = (tempBtn.left + tempBtn.right) / 2;
     // const bottom = tempBtn.bottom - 3; //lifting it 3px up
     openSubmenu(page);
+  };
+
+  const displaySocial = (e, text) => {
+    const page = e.target.textContent;
+    //finding the center and bottom of the button
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right) / 2;
+    const bottom = 37; //pushin it 3px up
+    openSocialMenu(text, { center, bottom });
+  };
+
+  const displayBag = (e, text) => {
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right) / 2;
+    const bottom = 37; //pushing it 3px down
+    openSocialMenu(text, { center, bottom });
   };
 
   return (
@@ -50,14 +67,26 @@ const Navbar = () => {
       </ul>
 
       <ul className="social-icons">
-        {social.map((socialIcon, index) => {
-          const { url, icon } = socialIcon;
-          return (
-            <li key={index}>
-              <a href={url}>{icon}</a>
-            </li>
-          );
-        })}
+        <li>
+          <button
+            className="link-btn"
+            onClick={(e) => {
+              displaySocial(e, "profile");
+            }}
+          >
+            <FaUserTie />
+          </button>
+        </li>
+        <li>
+          <button
+            className="link-btn"
+            onClick={(e) => {
+              displayBag(e, "cart");
+            }}
+          >
+            <FaShoppingBag />
+          </button>
+        </li>
       </ul>
     </nav>
   );

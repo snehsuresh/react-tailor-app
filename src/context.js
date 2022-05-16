@@ -24,20 +24,59 @@ export const AppProvider = ({ children }) => {
     content: { images: [] },
   });
 
-  const [checked, setChecked] = useState([]);
+  //
+  const [isSocialmenuOpen, setIsSocialmenuOpen] = useState(false);
+  const [isSubcartOpen, setIsSubcartOpen] = useState(false);
+  const [location, setLocation] = useState({});
+  const [socialPage, setSocialPage] = useState({ socialPage: "", links: [] });
+
+  const openSocialMenu = (text, coordinates) => {
+    setLocation(coordinates);
+    if (text === "profile") {
+      setIsSocialmenuOpen(true);
+      setIsSubcartOpen(false);
+    }
+    if (text === "cart") {
+      setIsSocialmenuOpen(false);
+      setIsSubcartOpen(true);
+    }
+  };
+  const closeSocialMenu = () => {
+    setIsSocialmenuOpen(false);
+    setIsSubcartOpen(false);
+  };
+  //
+
+  const [filterChecked, setFilterChecked] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState([]);
   const [fabricCollection, setFabricCollection] = useState(fabrics);
-  const [selectedSuitFabricIds, setSelectedSuitFabricIds] = useState([0]);
-  const [selectedShirtFabricIDs, setSelectedShirtFabricIDs] = useState([0]);
+  const [selectedSuitFabricId, setSelectedSuitFabricId] = useSessionStorage(
+    "fabric-selected",
+    0
+  );
 
   const [designPage, setDesignPage] = useSessionStorage("status", 0);
   const [dropdownValue, setdropdownValue] = useSessionStorage(
     "dropdown",
     "Shirt"
   );
-  const [selectedShirtCollarIDs, setSelectedShirtCollarIDs] = useState([0]);
-  const [selectedShirtCuffIDs, setSelectedShirtCuffIDs] = useState([0]);
-  const [selectedShirtButtonIDs, setSelectedShirtButtonIDs] = useState([0]);
+
+  const [selectedShirtFabricID, setSelectedShirtFabricID] = useSessionStorage(
+    "shirt-fabric",
+    0
+  );
+  const [selectedShirtCollarID, setSelectedShirtCollarID] = useSessionStorage(
+    "shirt-collar-select",
+    0
+  );
+  const [selectedShirtCuffID, setSelectedShirtCuffID] = useSessionStorage(
+    "shirt-cuff-select",
+    0
+  );
+  const [selectedShirtButtonID, setSelectedShirtButtonID] = useSessionStorage(
+    "shirt-button-select",
+    0
+  );
   const [trouserImg, setTrouserImg] = useState(defaultTrouser);
   const [jacketImg, setJacketImg] = useState(defaultJacket);
   const [blazerInitials, setBlazerInitials] = useState("");
@@ -120,6 +159,7 @@ export const AppProvider = ({ children }) => {
     if (!e.target.classList.contains("link-btn")) {
       //if the target that you hover over does not have the 'link-btn' then close submenu
       closeSubmenu();
+      closeSocialMenu();
     }
   };
 
@@ -167,7 +207,10 @@ export const AppProvider = ({ children }) => {
     lining: "",
     cummerbund: "",
   });
-  const [selectedLiningIDs, setSelectedLiningIDs] = useState([0]);
+  const [selectedLiningID, setSelectedLiningID] = useSessionStorage(
+    "selected-lining",
+    0
+  );
 
   const [needCummerbund, setNeedCummerbund] = useSessionStorage(
     "cummerbund",
@@ -178,6 +221,8 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         isSubmenuOpen,
+
+        isSubcartOpen,
         // location,
         page,
         openSubmenu,
@@ -202,14 +247,14 @@ export const AppProvider = ({ children }) => {
         designPage,
         setDesignPage,
 
-        checked,
-        setChecked,
+        filterChecked,
+        setFilterChecked,
         selectedFilter,
         setSelectedFilter,
         fabricCollection,
         setFabricCollection,
-        selectedSuitFabricIds,
-        setSelectedSuitFabricIds,
+        selectedSuitFabricId,
+        setSelectedSuitFabricId,
         custmoisedLook,
         setCustomisedLook,
         needMeasure,
@@ -230,14 +275,14 @@ export const AppProvider = ({ children }) => {
         setShirt,
         setTrouserImg,
 
-        selectedShirtFabricIDs,
-        setSelectedShirtFabricIDs,
-        selectedShirtCollarIDs,
-        setSelectedShirtCollarIDs,
-        selectedShirtCuffIDs,
-        setSelectedShirtCuffIDs,
-        selectedShirtButtonIDs,
-        setSelectedShirtButtonIDs,
+        selectedShirtFabricID,
+        setSelectedShirtFabricID,
+        selectedShirtCollarID,
+        setSelectedShirtCollarID,
+        selectedShirtCuffID,
+        setSelectedShirtCuffID,
+        selectedShirtButtonID,
+        setSelectedShirtButtonID,
 
         dropdownValue,
         setdropdownValue,
@@ -261,8 +306,8 @@ export const AppProvider = ({ children }) => {
         blazerInitials,
         setBlazerInitials,
 
-        selectedLiningIDs,
-        setSelectedLiningIDs,
+        selectedLiningID,
+        setSelectedLiningID,
         addons,
         setAddons,
         needCummerbund,
@@ -273,6 +318,12 @@ export const AppProvider = ({ children }) => {
         setSubTotal,
         total,
         setTotal,
+
+        isSocialmenuOpen,
+        location,
+        socialPage,
+        openSocialMenu,
+        closeSocialMenu,
       }}
     >
       {children}

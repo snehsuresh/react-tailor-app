@@ -149,17 +149,14 @@ export const social = [
   {
     id: 1,
     url: "",
-    icon: <FaSearch />,
+    icon: <FaUserTie />,
+    name: "profile",
   },
   {
     id: 2,
     url: "",
-    icon: <FaUserTie />,
-  },
-  {
-    id: 3,
-    url: "",
     icon: <FaShoppingBag />,
+    name: "cart",
   },
 ];
 
