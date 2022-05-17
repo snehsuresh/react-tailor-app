@@ -22,11 +22,11 @@ const Checkout = () => {
             <span className="amex" />
             <span className="discover" />
           </div>
-          <form>
+          <form className="checkout-form">
             <div className="form-group">
               <label htmlFor="PaymentAmount">Payment amount</label>
               <div className="amount-placeholder">
-                <span>Rs.</span>
+                <span>₹ </span>
                 <span>{total}</span>
               </div>
             </div>
@@ -61,7 +61,7 @@ const Checkout = () => {
               <label htmlFor="SecurityCode">Security code</label>
               <div className="input-container">
                 <input id="SecurityCode" className="form-control" type="text" />
-                <i id="cvc" className="fa fa-question-circle" />
+                {/* <i id="cvc" className="fa fa-question-circle" /> */}
               </div>
               <div className="cvc-preview-container two-card hide">
                 <div className="amex-cvc-preview" />
@@ -85,13 +85,13 @@ const Checkout = () => {
                   data-placement="left"
                   data-content="Enter the ZIP/Postal code for your credit card billing address."
                 >
-                  <i className="fa fa-question-circle" />
+                  {/* <i className="fa fa-question-circle" /> */}
                 </a>
               </div>
             </div>
             <button id="PayButton" className="checkout-btn" type="submit">
               <span className="submit-button-lock" />
-              <span className="">Pay Rs. {total}</span>
+              <span className="">Pay ₹ {total}</span>
             </button>
           </form>
         </div>

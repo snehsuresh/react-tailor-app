@@ -1544,15 +1544,10 @@ tr.order-total {
 }
 
 
-
-/* input {
-  margin-top: 3px;
-  padding: 15px;
-  font-size: 16px;
-  width: 100%;
-  border-radius: 3px;
-  border: 1px solid #dcdcdc;
-} */
+.checkout-form input {
+    width: 100%;
+    height: 2rem;
+}
 
 .ccicon {
   height: 38px;
@@ -1847,16 +1842,20 @@ input[type="radio"][id^="cb"] {
   display: none;
 }
 
-label {
-  padding-bottom: 5px;
-  font-size: 13px;
-  border: 1px solid #fff;
-  padding: 10px;
-  display: block;
-  position: relative;
-  margin: 10px;
-  cursor: pointer;
+.checkout-form label {
+    padding-bottom: 5px;
+    font-size: 1rem;
+    text-align: left;
+    border: 1px solid #fff;
+    padding: 10px 0;
+    display: block;
+    position: relative;
+    margin: 10px 0;
+    cursor: pointer;
+}
 
+.amount-placeholder {
+    font-weight: bold;
 }
 
 label::before {
