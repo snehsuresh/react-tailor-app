@@ -37,12 +37,11 @@ const Navbar = () => {
     <nav className="toolbar-1" onMouseOver={handleSubmenu}>
       <div className="nav-header">
         <Link to="/">
-          <img
-            className="logo"
-            src={logo}
-            alt="logo"
-            style={{ opacity: 0.8 }}
-          />
+          <div className="logo-container">
+            <span className="brand-logo" style={{ color: "black" }}>
+              THE BESPOKE CO.
+            </span>
+          </div>
         </Link>
       </div>
       <ul className="menu-links">
