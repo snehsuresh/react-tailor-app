@@ -5,7 +5,7 @@ import Subcart from "../components/Subcart";
 import ThreeModels from "../components/ThreeModels";
 import Cover from "../components/Cover";
 import Reviews from "../components/Reviews";
-
+import Footer from "../components/Footer";
 import { useGobalContext } from "../context";
 import { models } from "../data";
 
@@ -46,6 +46,7 @@ const Home = () => {
           <Cover />
           <ThreeModels props={{ imgsLoaded }} />
           <Reviews />
+          <Footer />
         </>
       ) : (
         <h1>Loading images...</h1>

@@ -33,7 +33,9 @@ export default function Cover() {
         <h4 className="cover-grid-item-1">CUSTOM SUITS</h4>
         <div className="cover-footer">
           <div className="logo-container">
-            <span className="brand-logo">THE BESPOKE CO.</span>
+            <span className="brand-logo" style={{ color: "grey" }}>
+              THE BESPOKE COMPANY
+            </span>
           </div>
         </div>
         <p className="cover-grid-item-2">
@@ -42,7 +44,6 @@ export default function Cover() {
           choosing from more than 50 fabrics.
         </p>
 
-        {/* <h5 className="cover-grid-item-3">starting ₹5,499</h5> */}
         <Link
           onClick={() => {
             setDesignPage(0);
@@ -52,6 +53,7 @@ export default function Cover() {
         >
           Design
         </Link>
+        <h5 className="cover-grid-item-3">starting ₹5,499</h5>
       </section>
       <section className="cover-section-2">
         {coverModels.map((data, dataIndex) => {
