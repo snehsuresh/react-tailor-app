@@ -39,9 +39,6 @@ We welcome contributions from the open-source community, especially 3D designers
 1. **Fork the Repository**: Click the "Fork" button at the top right of the GitHub repository to create your copy.
 
 2. **Clone Your Fork**: Clone your forked repository to your local machine.
-```
-git push origin feature/your-feature-name
-```
 
 3. **Create a New Branch**: Create a new branch for your contribution with a descriptive name.
 
@@ -50,7 +47,9 @@ git push origin feature/your-feature-name
 5. **Commit Your Changes**:
 
 6. **Push to Your Fork**:
-
+```
+git push origin feature/your-feature-name
+```
 7. **Open a Pull Request**: Go to the original Tailorfy repository on GitHub and open a pull request. Describe your changes and contributions in detail.
 
 ## License
