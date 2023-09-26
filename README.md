@@ -6,7 +6,7 @@ Tailorfy is an innovative web application that empowers you to design and custom
 
 - **Custom Suit Design**: Tailorfy allows you to choose from a wide range of fabrics, colors, and patterns to create your custom suit. You can experiment with different combinations until you find the perfect look.
 
-- **Precise Measurements**: Input your exact measurements to ensure a tailored fit that's comfortable and stylish.
+- **Precise Measurements**: Input your exact measurements to ensure a tailored fit that's comfortable and stylish. Or book an appointment for a tailor to visit you for the same.
 
 - **3D Visualization**: Visualize your suit in 3D to see how it will look from every angle. This feature offers an immersive online trial experience.
 
